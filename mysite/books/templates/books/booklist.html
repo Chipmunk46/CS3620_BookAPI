@@ -1,0 +1,42 @@
+{% extends 'books/base.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+    <div class="row mt-3">
+        <form action="" method="GET">
+            <input type="search" name="book_name">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    {% for book in book_object %}
+        <div class="row mt-3">
+            <div class="col-md3 offset-md-2 row-bordered">
+                <h2>{{ book.name }}</h2>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row mt-3">
+    {% if book_object.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ book_object.previous_page_number }}">Previous</a>
+    {% endif %}
+    </div>
+    <div class="row mt-3">
+    {% if book_object.has_next %}
+        <a href="?page={{ book_object.next_page_number }}">Next</a>
+        <a href="?page={{ book_object.paginator.num_pages }}">Last</a>
+    {% endif %}
+    </div>
+    <p>Page {{ book_object.number }} of {{ book_object.paginator.num_pages }}</p>
+
+{% endblock %}
+</body>
+</html>

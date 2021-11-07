@@ -19,6 +19,7 @@ from rest_framework import routers
 from books.views import BookViewSet, HorrorViewSet, ComedyViewSet, RomanceViewSet, MysteryViewSet, FantasyViewSet, HistoricalViewSet, ScienceFictionViewSet, BiographyViewSet, PoetryViewSet, ClassicsViewSet
 from django.conf.urls.static import static
 from django.conf import settings
+from books import views
 
 router = routers.SimpleRouter()
 router.register('books', BookViewSet)
@@ -34,6 +35,7 @@ router.register('poetry', PoetryViewSet)
 router.register('classics', ClassicsViewSet)
 
 urlpatterns = [
+    path('books/', views.book_list, name="book_list"),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
